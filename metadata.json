@@ -1,0 +1,5 @@
+{
+  "name": "Desafio Backend Fintech com Golang",
+  "description": "Uma aplicação frontend para guiar e testar um desafio técnico completo de backend em Go para uma vaga de Pessoa Desenvolvedora Pleno no contexto de uma fintech.",
+  "requestFramePermissions": []
+}
