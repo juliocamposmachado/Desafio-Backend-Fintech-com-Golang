@@ -2,6 +2,19 @@
 
 Este repositório apresenta uma solução para um desafio técnico de backend focado em um sistema de pagamentos simplificado, desenvolvido em Golang. Este projeto não apenas demonstra proficiência em tecnologias modernas e boas práticas de engenharia de software, mas também serve como um **teste de conhecimento de engenharia de software e full stack**, evidenciando a capacidade de aceitar e entregar todas as demandas de tecnologia com o auxílio de diversas IAs. O serviço foi **concluído com implantação em menos de 12 horas desde a construção do zero**.
 
+Este projeto foi desenvolvido especificamente como um teste de conhecimento para a vaga de **Pessoa Desenvolvedora Backend Pleno | Golang** na Impulser Professional. Detalhes da vaga podem ser encontrados em: [https://impulso.team/pt/profissionais/oportunidade/2629?referral=45ea6418](https://impulso.team/pt/profissionais/oportunidade/2629?referral=45ea6418)
+
+## Resumo da Posição (Vaga 2629 - Impulser Professional)
+
+Estamos em busca de um(a) Desenvolvedor(a) Backend Pleno com experiência em Golang para atuar em um projeto inovador na área de fintech. O profissional será responsável por desenvolver e manter soluções técnicas que atendam às necessidades do negócio.
+
+## Responsabilidades e Atribuições da Posição:
+*   Atuar em problemas de escopo aberto, oferecendo soluções criativas e eficazes.
+*   Participar de refinamentos técnicos, contribuindo com expertise e ideias para a solução dos desafios.
+*   Garantir a qualidade técnica das entregas, alinhando-as com os padrões da squad.
+*   Estabelecer comunicação eficaz com outras áreas técnicas e equipes de produto para tratar de dependências e integrações necessárias.
+*   Colaborar com outros squads que estejam integrados ou dependentes dos serviços desenvolvidos.
+
 ## 🚀 Tecnologias Utilizadas
 
 *   **Backend:** Golang (com `chi` para roteamento HTTP)
