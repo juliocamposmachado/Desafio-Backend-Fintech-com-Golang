@@ -67,5 +67,5 @@ func (h *Handler) GetAccountBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	web.RespondWithJSON(w, http.StatusOK, map[string]interface{}{"account_id": id, "balance": balance})
+	json.NewEncoder(w).Encode(map[string]interface{}{"account_id": id, "balance": balance})
 }

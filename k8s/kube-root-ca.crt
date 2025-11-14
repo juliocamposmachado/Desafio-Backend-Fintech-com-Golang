@@ -1,0 +1,5 @@
+# Cole o conteúdo do seu certificado kube-root-ca.crt aqui.
+# Exemplo:
+# -----BEGIN CERTIFICATE-----
+# MIIFGTCCBAagAwIBAgIU...
+# -----END CERTIFICATE-----
