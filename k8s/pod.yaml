@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fintech-api-pod
+  labels:
+    app: fintech-api
+spec:
+  containers:
+  - name: fintech-api
+    image: your-dockerhub-radiotatuapefm/fintech-api:latest # Substitua pelo seu usuário do Docker Hub
+    ports:
+    - containerPort: 8080
