@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+    environment:
+      # Variáveis de ambiente para conectar aos outros serviços
+      POSTGRES_URL: "postgres://user:password@db:5432/fintech?sslmode=disable"
+      REDIS_URL: "redis:6379"
+      RABBITMQ_URL: "amqp://guest:guest@rabbitmq:5672/"
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fintech
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"  # Para a aplicação
+      - "15672:15672" # Para a UI de gerenciamento
+
+volumes:
+  postgres_data:
