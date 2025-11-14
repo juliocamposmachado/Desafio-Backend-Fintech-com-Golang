@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import CodeBlock from './CodeBlock';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://desafio-backend-fintech-com-golang-354404045586.europe-west1.run.app';
 
 const ApiTester: React.FC = () => {
     const [createAccountData, setCreateAccountData] = useState({ document_number: '', name: '' });
@@ -50,9 +49,9 @@ const ApiTester: React.FC = () => {
                 {/* Create Account */}
                 <div className="bg-secondary p-6 rounded-lg border border-border-color">
                     <h3 className="text-xl font-semibold mb-4">Criar Conta (POST /accounts)</h3>
-                    <form onSubmit={(e) => { e.preventDefault(); handleRequest('/accounts', 'POST', {...createAccountData}); }} className="space-y-4">
-                        <input type="text" placeholder="Número do Documento" value={createAccountData.document_number} onChange={e => setCreateAccountData({ ...createAccountData, document_number: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
-                        <input type="text" placeholder="Nome Completo" value={createAccountData.name} onChange={e => setCreateAccountData({ ...createAccountData, name: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); handleRequest('/accounts', 'POST', {...createAccountData}); }} className="space-y-4">
+                        <input type="text" placeholder="Número do Documento" value={createAccountData.document_number} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCreateAccountData({ ...createAccountData, document_number: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                        <input type="text" placeholder="Nome Completo" value={createAccountData.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCreateAccountData({ ...createAccountData, name: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
                         <button type="submit" className="w-full bg-accent text-primary font-bold py-2 px-4 rounded hover:bg-blue-400 transition-colors">Criar Conta</button>
                     </form>
                 </div>
@@ -60,28 +59,28 @@ const ApiTester: React.FC = () => {
                 {/* Create Transaction */}
                 <div className="bg-secondary p-6 rounded-lg border border-border-color">
                     <h3 className="text-xl font-semibold mb-4">Criar Transação (POST /transactions)</h3>
-                    <form onSubmit={(e) => { e.preventDefault(); handleRequest('/transactions', 'POST', { ...createTransactionData, amount: parseFloat(createTransactionData.amount) }); }} className="space-y-4">
-                        <input type="text" placeholder="ID da Conta de Origem" value={createTransactionData.source_account_id} onChange={e => setCreateTransactionData({ ...createTransactionData, source_account_id: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
-                        <input type="text" placeholder="ID da Conta de Destino" value={createTransactionData.destination_account_id} onChange={e => setCreateTransactionData({ ...createTransactionData, destination_account_id: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
-                        <input type="number" placeholder="Valor" value={createTransactionData.amount} onChange={e => setCreateTransactionData({ ...createTransactionData, amount: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); handleRequest('/transactions', 'POST', { ...createTransactionData, amount: parseFloat(createTransactionData.amount) }); }} className="space-y-4">
+                        <input type="text" placeholder="ID da Conta de Origem" value={createTransactionData.source_account_id} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCreateTransactionData({ ...createTransactionData, source_account_id: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                        <input type="text" placeholder="ID da Conta de Destino" value={createTransactionData.destination_account_id} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCreateTransactionData({ ...createTransactionData, destination_account_id: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                        <input type="number" placeholder="Valor" value={createTransactionData.amount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCreateTransactionData({ ...createTransactionData, amount: e.target.value })} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
                         <button type="submit" className="w-full bg-accent text-primary font-bold py-2 px-4 rounded hover:bg-blue-400 transition-colors">Enviar Transação</button>
                     </form>
                 </div>
 
                 {/* Get Account */}
                  <div className="bg-secondary p-6 rounded-lg border border-border-color">
-                    <h3 className="text-xl font-semibold mb-4">Consultar Conta (GET /accounts/{'{id}'})</h3>
-                    <form onSubmit={(e) => { e.preventDefault(); handleRequest(`/accounts/${getAccountId}`, 'GET'); }} className="space-y-4">
-                        <input type="text" placeholder="ID da Conta" value={getAccountId} onChange={e => setGetAccountId(e.target.value)} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                    <h3 className="text-xl font-semibold mb-4">{"Consultar Conta (GET /accounts/{id})"}</h3>
+                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); handleRequest(`/accounts/${getAccountId}`, 'GET'); }} className="space-y-4">
+                        <input type="text" placeholder="ID da Conta" value={getAccountId} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGetAccountId(e.target.value)} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
                         <button type="submit" className="w-full bg-accent text-primary font-bold py-2 px-4 rounded hover:bg-blue-400 transition-colors">Consultar Conta</button>
                     </form>
                 </div>
 
                 {/* Get Balance */}
                  <div className="bg-secondary p-6 rounded-lg border border-border-color">
-                    <h3 className="text-xl font-semibold mb-4">Consultar Saldo (GET /accounts/{'{id}'}/balance)</h3>
-                    <form onSubmit={(e) => { e.preventDefault(); handleRequest(`/accounts/${getBalanceId}/balance`, 'GET'); }} className="space-y-4">
-                        <input type="text" placeholder="ID da Conta" value={getBalanceId} onChange={e => setGetBalanceId(e.target.value)} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+                    <h3 className="text-xl font-semibold mb-4">{"Consultar Saldo (GET /accounts/{id}/balance)"}</h3>
+                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); handleRequest(`/accounts/${getBalanceId}/balance`, 'GET'); }} className="space-y-4">
+                        <input type="text" placeholder="ID da Conta" value={getBalanceId} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGetBalanceId(e.target.value)} className="w-full bg-primary border border-border-color rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
                         <button type="submit" className="w-full bg-accent text-primary font-bold py-2 px-4 rounded hover:bg-blue-400 transition-colors">Consultar Saldo</button>
                     </form>
                 </div>
@@ -109,4 +108,3 @@ const ApiTester: React.FC = () => {
 };
 
 export default ApiTester;
-   

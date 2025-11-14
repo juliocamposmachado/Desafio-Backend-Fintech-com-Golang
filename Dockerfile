@@ -8,6 +8,8 @@ RUN go mod download
 
 COPY . .
 
+RUN go mod tidy # Garante que todas as dependências do código copiado sejam resolvidas
+
 # Build the binary
 RUN CGO_ENABLED=0 GOOS=linux go build -o /app/main ./cmd/api/main.go
 

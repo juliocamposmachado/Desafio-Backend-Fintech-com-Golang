@@ -1,29 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
+    "target": "ES2022",                  // Modern JavaScript target
+    "lib": ["DOM", "DOM.Iterable", "ES2022"], // Include DOM types and modern ES features
+    "allowJs": true,                     // Allow JavaScript files to be compiled
+    "skipLibCheck": true,                // Skip type checking of declaration files
+    "esModuleInterop": true,             // Enables Babel-like import/export interoperability
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "strict": true,                      // Enable all strict type-checking options
+    "forceConsistentCasingInFileNames": true, // Ensure consistent file casing
+    "module": "ESNext",                  // Use modern ES modules
+    "moduleResolution": "bundler",       // Recommended for bundlers like Vite
+    "resolveJsonModule": true,           // Allow importing .json files
+    "isolatedModules": true,             // Ensure each file can be safely transpiled without relying on other files
+    "noEmit": true,                      // Do not emit output JavaScript files
+    "jsx": "react-jsx",                  // Enable JSX support for React 17+
+    "paths": {                           // Path aliases
+      "@/*": ["./src/*"]
     },
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  }
+    "allowImportingTsExtensions": true,  // Allow .ts extensions in import paths
+    "useDefineForClassFields": true,     // ES2022 class fields behavior
+    "moduleDetection": "force",          // Force module detection for all files
+    "types": ["node"]                    // Include Node.js types (if you mix with backend or use Node.js features like 'process.env')
+  },
+  "include": ["src", "vite-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"], // Files to include in compilation
+  "exclude": ["node_modules"]           // Files to exclude
 }
