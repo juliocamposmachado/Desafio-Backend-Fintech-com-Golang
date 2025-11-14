@@ -5,6 +5,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+
+	"fintech-challenge/pkg/web"
 )
 
 type Handler struct {
@@ -18,53 +20,52 @@ func NewHandler(s *Service) *Handler {
 func (h *Handler) CreateAccount(w http.ResponseWriter, r *http.Request) {
 	var req CreateAccountRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, err.Error())
 		return
 	}
 
 	if req.DocumentNumber == "" || req.Name == "" {
-		http.Error(w, "Document number and name are required", http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, "Document number and name are required")
 		return
 	}
 
 	account, err := h.Service.CreateAccount(req)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		web.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(account)
+	web.RespondWithJSON(w, http.StatusCreated, account)
 }
 
 func (h *Handler) GetAccount(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if id == "" {
-		http.Error(w, "Account ID is required", http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, "Account ID is required")
 		return
 	}
 
 	account, err := h.Service.GetAccount(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		web.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	json.NewEncoder(w).Encode(account)
+	web.RespondWithJSON(w, http.StatusOK, account)
 }
 
 func (h *Handler) GetAccountBalance(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if id == "" {
-		http.Error(w, "Account ID is required", http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, "Account ID is required")
 		return
 	}
 
 	balance, err := h.Service.GetAccountBalance(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		web.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	json.NewEncoder(w).Encode(map[string]interface{}{"account_id": id, "balance": balance})
+	web.RespondWithJSON(w, http.StatusOK, map[string]interface{}{"account_id": id, "balance": balance})
 }

@@ -3,6 +3,8 @@ package transactions
 import (
 	"encoding/json"
 	"net/http"
+
+	"fintech-challenge/pkg/web"
 )
 
 type Handler struct {
@@ -16,21 +18,20 @@ func NewHandler(s *Service) *Handler {
 func (h *Handler) CreateTransaction(w http.ResponseWriter, r *http.Request) {
 	var req CreateTransactionRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, err.Error())
 		return
 	}
 
 	if req.SourceAccountID == "" || req.DestinationAccountID == "" || req.Amount <= 0 {
-		http.Error(w, "Source account ID, destination account ID, and a positive amount are required", http.StatusBadRequest)
+		web.RespondWithError(w, http.StatusBadRequest, "Source account ID, destination account ID, and a positive amount are required")
 		return
 	}
 
 	transaction, err := h.Service.CreateTransaction(req)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		web.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(transaction)
+	web.RespondWithJSON(w, http.StatusCreated, transaction)
 }
